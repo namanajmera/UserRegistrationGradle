@@ -1,11 +1,12 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+//import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
+import org.junit.jupiter.api.Test;
 
 public class UserRegistrationTest {
     public UserRegistration user;
