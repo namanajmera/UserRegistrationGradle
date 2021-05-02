@@ -20,11 +20,11 @@ public class UserRegistrationTest {
 
     @Test
     public void checkNameTest() {
-        Assert.assertTrue(UserRegistration.checkName("Debojyoti"));
+        Assert.assertTrue(UserRegistration.validateFName.test("Debojyoti"));
 
-        Assert.assertFalse(UserRegistration.checkName("mi"));
-        Assert.assertFalse(UserRegistration.checkName("D"));
-        Assert.assertFalse(UserRegistration.checkName("debojyoti"));
+        Assert.assertFalse(UserRegistration.validateFName.test("mi"));
+        Assert.assertFalse(UserRegistration.validateFName.test("D"));
+        Assert.assertFalse(UserRegistration.validateFName.test("debojyoti"));
     }
 
     @Test
@@ -38,35 +38,35 @@ public class UserRegistrationTest {
 
     @Test
     public void mobileTestValid() {
-        Assert.assertTrue(UserRegistration.checkMobile("91 9874311017"));
+        Assert.assertTrue(UserRegistration.validateMobile.test("91 9874311017"));
     }
 
     @Test
     public void mobileTestInvalid() {
-        Assert.assertFalse(UserRegistration.checkMobile("91 98 74311017"));
-        Assert.assertFalse(UserRegistration.checkMobile("919 874311017"));
-        Assert.assertFalse(UserRegistration.checkMobile("A91 9874311017"));
-        Assert.assertFalse(UserRegistration.checkMobile("91b9874311017"));
+        Assert.assertFalse(UserRegistration.validateMobile.test("91 98 74311017"));
+        Assert.assertFalse(UserRegistration.validateMobile.test("919 874311017"));
+        Assert.assertFalse(UserRegistration.validateMobile.test("A91 9874311017"));
+        Assert.assertFalse(UserRegistration.validateMobile.test("91b9874311017"));
     }
 
     @Test
     public void passwordTestValid() {
-        Assert.assertTrue(UserRegistration.checkPassword("iMhQhPE8#"));
+        Assert.assertTrue(UserRegistration.validatePassword.test("iMhQhPE8#"));
     }
 
     @Test
     public void passwordTestInvalid1() {
-        Assert.assertFalse(UserRegistration.checkPassword("@iMhQhPE8#"));//spl. chracters exactly once
+        Assert.assertFalse(UserRegistration.validatePassword.test("@iMhQhPE8#"));//spl. chracters exactly once
     }
 
     @Test
     public void passwordTestInvalid2() {
-        Assert.assertFalse(UserRegistration.checkPassword("ihPE8#"));
+        Assert.assertFalse(UserRegistration.validatePassword.test("ihPE8#"));
     }
 
     @Test
     public void passwordTestInvalid3() {
-        Assert.assertFalse(UserRegistration.checkPassword("abcdeghyierf&"));
+        Assert.assertFalse(UserRegistration.validatePassword.test("abcdeghyierf&"));
     }
 
     @Test

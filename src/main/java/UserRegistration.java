@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,22 +10,24 @@ public class UserRegistration {
     private static String mobile;
     private static String password;
 
-    public static boolean checkName(String name) {
-        String pattern = "[A-Z][a-z]{2,}";
-        return Pattern.matches(pattern, name);
-    }
+    public static final Predicate<String> validateFName = name -> (
+            Pattern.matches("[A-Z][a-z]{2,}", name)
+    );
 
-    public static boolean checkEmail(String email) {
-        String pattern = "^[\\w-+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-        return Pattern.matches(pattern, email);
-    }
+    public static final Predicate<String> validateLName = name -> (
+            Pattern.matches("[A-Z][a-z]{2,}", name)
 
-    public static boolean checkMobile(String number) {
-        String pattern = "[0-9]{2}+([ ])+([0-9]{10})";
-        return Pattern.matches(pattern, number);
-    }
+    );
 
-    public static boolean checkPassword(String password) {
+    public static final Predicate<String> validateEmail = email -> (
+            Pattern.matches("^[\\w-+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$", email)
+    );
+
+    public static final Predicate<String> validateMobile = number -> (
+            Pattern.matches("[0-9]{2}+([ ])+([0-9]{10})", number)
+    );
+
+    public static final Predicate<String> validatePassword = password -> {
         if (password.length() < 8)
             return false;
         Matcher splChar = Pattern.compile("[^a-zA-Z0-9]").matcher(password);
@@ -34,14 +37,14 @@ public class UserRegistration {
         return Pattern.matches(".*[A-Z].*", password) &&
                 Pattern.matches(".*[0-9].*", password) &&
                 (splCharCount == 1);
-    }
+    };
 
     public static String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) throws IllegalFieldValueException {
-        if (!checkName(firstName))
+        if (!validateFName.test(firstName))
             throw new IllegalFieldValueException(ERROR_MESSAGE.fname);
         UserRegistration.firstName = firstName;
     }
@@ -51,7 +54,7 @@ public class UserRegistration {
     }
 
     public void setEmail(String email) throws IllegalFieldValueException {
-        if (!checkEmail(email))
+        if (!validateEmail.test(email))
             throw new IllegalFieldValueException(ERROR_MESSAGE.email);
         UserRegistration.email = email;
     }
@@ -61,7 +64,7 @@ public class UserRegistration {
     }
 
     public void setMobile(String mobile) throws IllegalFieldValueException {
-        if (!checkMobile(mobile))
+        if (!validateMobile.test(mobile))
             throw new IllegalFieldValueException(ERROR_MESSAGE.mobile);
         UserRegistration.mobile = mobile;
     }
@@ -71,7 +74,7 @@ public class UserRegistration {
     }
 
     public void setPassword(String password) throws IllegalFieldValueException {
-        if (!checkPassword(password))
+        if (!validatePassword.test(password))
             throw new IllegalFieldValueException(ERROR_MESSAGE.password);
         UserRegistration.password = password;
     }
@@ -81,7 +84,7 @@ public class UserRegistration {
     }
 
     public void setLastName(String lastName) throws IllegalFieldValueException {
-        if (!checkName(lastName))
+        if (!validateLName.test(lastName))
             throw new IllegalFieldValueException(ERROR_MESSAGE.lname);
         UserRegistration.lastName = lastName;
     }

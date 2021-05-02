@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -15,6 +15,7 @@ public class EmailValidationTest {
         this.emailInput = emailInput;
         this.expected = expected;
     }
+
     @Parameterized.Parameters
     public static List<Object[]> emailSamples() {
         return Arrays.asList(new Object[][]{
@@ -29,21 +30,21 @@ public class EmailValidationTest {
                 {"abc.@gmail.com", false},
                 {"abc@abc@gmail.com", false},
                 {"abc@gmail.com.1a", false},
-                {"abc@gmail.com.aa.au",false},
-                {"abc@yahoo.com",true},
-                {"abc-100@yahoo.com",true},
-                {"abc.100@yahoo.com",true},
-                {"abc111@abc.com",true},
-                {"abc-100@abc.net",true},
-                {"abc.100@abc.com.au",true},
-                {"abc@1.com",true},
-                {"abc@gmail.com.com",true},
-                {"abc+100@gmail.com",true}
+                {"abc@gmail.com.aa.au", false},
+                {"abc@yahoo.com", true},
+                {"abc-100@yahoo.com", true},
+                {"abc.100@yahoo.com", true},
+                {"abc111@abc.com", true},
+                {"abc-100@abc.net", true},
+                {"abc.100@abc.com.au", true},
+                {"abc@1.com", true},
+                {"abc@gmail.com.com", true},
+                {"abc+100@gmail.com", true}
         });
     }
 
     @Test
-    public void emailValidationChecker(){
-        Assertions.assertEquals(expected,UserRegistration.checkEmail(emailInput));
+    public void emailValidationChecker() {
+        Assert.assertEquals(expected, UserRegistration.validateEmail.test(emailInput));
     }
 }
